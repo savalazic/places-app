@@ -15,13 +15,15 @@ const Map = dynamic(
   import('../components/Map'),
   {
     ssr: false,
-    loading: () => (
-      <div className="loading">
-        <div className="inner">
-          <h2>Loading...</h2>
+    loading: () => {
+      return (
+        <div className="loading">
+          <div className="inner">
+          </div>
         </div>
-      </div>
-    )
+
+      );
+    }
   }
 );
 
@@ -53,14 +55,11 @@ class App extends Component {
     } else {
       userAgent = req.headers['user-agent'];
     }
-
     return { userAgent };
   }
 
   render() {
-
     const { userAgent } = this.props;
-
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
         <div className="app">
