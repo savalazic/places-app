@@ -1,0 +1,13 @@
+{
+  "token": "pk.eyJ1Ijoic2F2YWxhemljIiwiYSI6ImNqNjE3ZTl5dzB0OXYzMnE3bG1rZGloeTQifQ.fLNV-nXqEb2sclQrC5oiqg",
+  "styles": {
+    "light": "mapbox://styles/mapbox/light-v9",
+    "dark": "mapbox://styles/mapbox/dark-v9"
+  },
+  "colors": {
+    "bar": "#63e385",
+    "club": "#F34BE9",
+    "restaurant": "#fff947",
+    "cafe": "#2dd8fb"
+  }
+}

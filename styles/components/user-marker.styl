@@ -1,0 +1,28 @@
+/**
+ * UserMarker
+ * ----------
+ */
+
+.user-marker
+  size 20px
+  background $primary
+  border-radius 50%
+
+  animate markerPopIn 1000ms forwards, \
+    0% scale(0.5), 50% scale(1.2), 70% scale(0.8), 100% scale(1)
+  
+  &:before
+  &:after
+    content ''
+    absolute 0
+    border-radius 50%
+    transition background 400ms
+    background rgba($primary, .8)
+
+  &:before
+    spring-in-place \
+      pulse 1500ms infinite, 5, 6, scale(0.95)
+
+  &:after
+    animate \
+      ripple 1500ms infinite easeOutCubic, 100% scale(1.8), opacity(0)

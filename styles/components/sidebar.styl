@@ -1,0 +1,24 @@
+/**
+ * Sidebar
+ * ----------
+ */
+
+.sidebar
+  absolute top right
+  width $sidebarWidth
+  padding-top $navHeight
+  background $white
+  box-shadow $shadow
+  z-index 10
+  padding-bottom 65px
+
+  @media (max-width: $mobile)
+    height 35vh
+    top auto
+    bottom 0
+    left 0
+    width 100%
+    padding-top 0
+
+  .places
+    background $white

@@ -1,0 +1,68 @@
+/**
+ * Filter
+ * ----------
+ */
+
+.filter-container
+  width $sidebarWidth
+  float right
+  height $navHeight
+  padding 0 20px
+  font-size rem(14px)
+
+  @media (max-width: $mobile)
+    width 100%
+    float left
+    height auto
+
+  li
+    display inline-block
+    position relative
+    top 20px
+
+  .filter-heading
+    width 50%
+
+    @media (max-width: $mobile)
+      width 100%
+
+    h3, .icon
+      display inline-block
+
+    h3
+      margin-right 20px
+
+    .icon
+      margin 0 10px
+      font-size rem(20px)
+      color rgba($black, .25)
+      cursor pointer
+
+      transition color 500ms
+
+      &:hover
+        color $black
+
+  .filter-showing
+    float right
+    top 5px
+    width 50%
+
+    @media (max-width: $mobile)
+      width 100%
+
+    span
+      color rgba($black, .25)
+      width 20%
+
+    .select-field
+      display inline-block
+      vertical-align middle
+      width 79%
+      overflow hidden
+
+      hr
+        display none
+
+      button svg
+        display none !important

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 848 318">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-5 {
+        fill: none;
+      }
+
+      .cls-1 {
+        clip-rule: evenodd;
+      }
+
+      .cls-3 {
+        stroke: #4ea7b0;
+      }
+
+      .cls-3, .cls-5 {
+        stroke-miterlimit: 10;
+        stroke-width: 40px;
+      }
+
+      .cls-13, .cls-4 {
+        opacity: 0.1;
+      }
+
+      .cls-5 {
+        stroke: #bbd368;
+      }
+
+      .cls-6 {
+        fill: #bbd368;
+      }
+
+      .cls-7 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-8 {
+        fill: #4ea7b0;
+      }
+
+      .cls-9 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-10 {
+        clip-path: url(#clip-path-3);
+      }
+
+      .cls-11 {
+        clip-path: url(#clip-path-4);
+      }
+
+      .cls-12 {
+        fill: #d36892;
+      }
+
+      .cls-13, .cls-15 {
+        fill-rule: evenodd;
+      }
+
+      .cls-14 {
+        clip-path: url(#clip-path-5);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <path class="cls-1" d="M192,25a20,20,0,1,1,40,0V197H192Z"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path class="cls-1" d="M456,25a20,20,0,1,1,40,0V197H456Z"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <path class="cls-1" d="M800,192a20,20,0,0,1,40,0V293a20,20,0,0,1-40,0Z"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <path class="cls-1" d="M800,99a20,20,0,1,1,40,0v98H800Z"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <circle class="cls-2" cx="820.5" cy="36.5" r="22.5"/>
+    </clipPath>
+  </defs>
+  <title>Asset 1</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Logo_01" data-name="Logo 01">
+      <g id="_1" data-name="1">
+        <circle class="cls-3" cx="116" cy="197" r="96"/>
+        <path class="cls-4" d="M192,197h0a75.82,75.82,0,0,0,25.24,56.51c1.22-2.18,2.4-4.38,3.48-6.64C211,240,192,216.07,192,197Z"/>
+        <circle class="cls-5" cx="420" cy="197" r="96"/>
+        <circle class="cls-5" cx="268" cy="197" r="96"/>
+        <path class="cls-3" d="M212,197a96,96,0,0,0-192,0"/>
+        <circle class="cls-3" cx="572" cy="197" r="96"/>
+        <path class="cls-6" d="M724,313A116,116,0,1,1,840,197,116.13,116.13,0,0,1,724,313Zm0-192a76,76,0,1,0,76,76A76.09,76.09,0,0,0,724,121Z"/>
+        <circle class="cls-5" cx="724" cy="197" r="96"/>
+        <g class="cls-7">
+          <rect class="cls-8" x="187" width="50" height="202"/>
+        </g>
+        <path class="cls-8" d="M212,5a20,20,0,0,0-20,20V197h40V25A20,20,0,0,0,212,5Z"/>
+        <g class="cls-9">
+          <rect class="cls-8" x="451" width="50" height="202"/>
+        </g>
+        <g class="cls-10">
+          <rect class="cls-6" x="795" y="167" width="50" height="151"/>
+        </g>
+        <g class="cls-11">
+          <rect class="cls-12" x="795" y="74" width="50" height="128"/>
+        </g>
+        <path class="cls-13" d="M840,197V159.21a122.44,122.44,0,0,0-40-57.57V197Z"/>
+        <g class="cls-14">
+          <rect class="cls-12" x="793" y="9" width="55" height="55"/>
+        </g>
+        <path class="cls-4" d="M344,197h0a75.82,75.82,0,0,0,25.24,56.51c1.22-2.18,2.4-4.38,3.48-6.64C363,240,344,216.07,344,197Z"/>
+        <path class="cls-12" d="M420,313A116,116,0,1,1,536,197,116.13,116.13,0,0,1,420,313Zm0-192a76,76,0,1,0,76,76A76.09,76.09,0,0,0,420,121Z"/>
+        <path class="cls-4" d="M496,197h0a75.82,75.82,0,0,0,25.24,56.51c1.22-2.18,2.4-4.38,3.48-6.64C515,240,496,216.07,496,197Z"/>
+        <path class="cls-5" d="M364,197a96,96,0,0,0-96-96"/>
+        <path class="cls-3" d="M476,197a96,96,0,1,0,96-96"/>
+        <path class="cls-4" d="M648,197h0a75.82,75.82,0,0,0,25.24,56.51c1.22-2.18,2.4-4.38,3.48-6.64C667,240,648,216.07,648,197Z"/>
+        <path class="cls-5" d="M628,197a96,96,0,1,0,96-96"/>
+        <g class="cls-4">
+          <path d="M673.27,140.48q2.27-2,4.69-3.9a122.86,122.86,0,0,0-25.28-31q-2.39,1.87-4.68,3.87A116.81,116.81,0,0,1,673.27,140.48Z"/>
+        </g>
+        <g class="cls-4">
+          <path d="M521.27,140.48q2.27-2,4.69-3.9a122.86,122.86,0,0,0-25.28-31q-2.39,1.87-4.68,3.87A116.81,116.81,0,0,1,521.27,140.48Z"/>
+        </g>
+        <g class="cls-4">
+          <path d="M369.27,140.48q2.27-2,4.69-3.9a122.86,122.86,0,0,0-25.28-31q-2.39,1.87-4.68,3.87A116.81,116.81,0,0,1,369.27,140.48Z"/>
+        </g>
+        <g class="cls-4">
+          <path d="M232,86.74v43.36c2-1.05,3.95-2,6-2.92V84.94C236,85.48,234,86.09,232,86.74Z"/>
+        </g>
+        <g class="cls-4">
+          <path class="cls-15" d="M496,109.44v-7.8a121.83,121.83,0,0,0-40-21.22v6.3A116,116,0,0,1,496,109.44Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
