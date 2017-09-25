@@ -19,26 +19,6 @@ const Mapbox = ReactMapboxGl({
   accessToken: token,
 });
 
-const layer3d = {
-  'source-layer': 'building',
-  // 'filter': ['==', 'extrude', 'true'],
-  'type': 'fill-extrusion',
-  'minzoom': 10,
-};
-
-const paintLayer = {
-  'fill-extrusion-color': '#ddd',
-  'fill-extrusion-height': {
-    'type': 'identity',
-    'property': 'height',
-  },
-  'fill-extrusion-base': {
-    'type': 'identity',
-    'property': 'min_height',
-  },
-  'fill-extrusion-opacity': 0.4,
-};
-
 const UserMarker = () => (
   <div className="user-marker" />
 );
@@ -65,11 +45,6 @@ class Map extends Component {
         zoom: [13],
       });
     });
-
-    // this.userMarker.addEventListener('hover', (e) => {
-    //   e.preventDefault();
-    //   console.log('marker hover');
-    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -172,17 +147,10 @@ class Map extends Component {
           </button>
           {this.renderUserPin()}
           <Layer
-            id="3d-buildings"
-            sourceId="composite"
-            layerOptions={layer3d}
-            paint={paintLayer}
-          />
-          <Layer
             type="symbol"
             id="marker"
             layout={{ 'icon-image': 'marker-15' }}
           >
-
             {
               this.props.places.map(place => (
                 <Feature
@@ -201,7 +169,6 @@ class Map extends Component {
               ))
             }
           </Layer>
-
           {
             this.props.selectedPlace && (
               <Popup
