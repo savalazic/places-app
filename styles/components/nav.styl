@@ -10,6 +10,8 @@
   width 100%
   box-shadow $shadow
   height $navHeight
+  display flex
+  justify-content space-between
 
   @media (max-width: $mobile)
     height auto
@@ -21,3 +23,11 @@
     user-select none
     cursor default
     font-weight 500
+    margin-right auto
+
+  .nav-menu
+    padding 20px
+
+    .nav-item
+      margin 0 10px
+      display inline-block
