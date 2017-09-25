@@ -82,15 +82,6 @@ class Map extends Component {
     this.setState({ popupShowLabel });
   }
 
-  changeStyle = () => {
-    this.setState({
-      mapStyle:
-        this.state.mapStyle === 'mapbox://styles/mapbox/light-v9'
-          ? 'mapbox://styles/mapbox/dark-v9'
-          : 'mapbox://styles/mapbox/light-v9',
-    });
-  }
-
   renderUserPin = () => {
     if (!this.state.hasPosition) {
       return null;
@@ -105,6 +96,20 @@ class Map extends Component {
         <UserMarker />
       </Marker>
     );
+  }
+
+  renderPins = () => {
+    this.props.places.map((place) => {
+      console.log(place);
+      return (
+        <Marker
+          coordinates={[place.long, place.lat]}
+          className="marker-container"
+        >
+          <UserMarker />
+        </Marker>
+      );
+    });
   }
 
   render() {
@@ -130,45 +135,8 @@ class Map extends Component {
             width: '100vw',
           }}
         >
-          <button
-            onClick={this.changeStyle}
-            style={{
-              position: 'absolute',
-              top: 80,
-              left: 30,
-              zIndex: 100,
-              padding: 8,
-              border: 'none',
-              color: '#fff',
-              outline: 'none',
-            }}
-          >
-            CHANGE STYLE
-          </button>
           {this.renderUserPin()}
-          <Layer
-            type="symbol"
-            id="marker"
-            layout={{ 'icon-image': 'marker-15' }}
-          >
-            {
-              this.props.places.map(place => (
-                <Feature
-                  key={place.id}
-                  coordinates={[place.long, place.lat]}
-                  onMouseEnter={this.onToggleHover.bind(this, 'pointer')}
-                  onMouseLeave={this.onToggleHover.bind(this, '')}
-                  onClick={() => {
-                    this.props.selectPlace(place);
-                    this.setState({
-                      center: [this.props.selectedPlace.long, this.props.selectedPlace.lat],
-                      zoom: [17],
-                    });
-                  }}
-                />
-              ))
-            }
-          </Layer>
+          {this.renderPins()}
           {
             this.props.selectedPlace && (
               <Popup
