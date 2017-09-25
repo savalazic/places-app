@@ -10,7 +10,6 @@ const Filter = ({ onSortingChange, places }) => {
   return (
     <ul className="filter-container">
       <li className="filter-heading">
-        <h3>Places</h3>
         <i
           role="button"
           tabIndex="0"

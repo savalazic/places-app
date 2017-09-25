@@ -10,20 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
-
-const Map = dynamic(
-  import('../components/Map'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="loading">
-        <div className="inner">
-          <h2>Loading...</h2>
-        </div>
-      </div>
-    )
-  }
-);
+import AboutComponent from '../components/About';
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -43,7 +30,7 @@ const muiTheme = {
 };
 
 
-class App extends Component {
+class About extends Component {
 
   static getInitialProps({ req }) {
     // Ensures material-ui renders the correct css prefixes server-side
@@ -66,7 +53,7 @@ class App extends Component {
         <div className="app">
           <Meta />
           <Nav />
-          <Map />
+          <AboutComponent />
         </div>
       </MuiThemeProvider>
     );
@@ -74,4 +61,4 @@ class App extends Component {
 }
 
 
-export default withRedux(initStore, null, null)(App); // store, mapStateToProps, mapDispatchToProps
+export default withRedux(initStore, null, null)(About); // store, mapStateToProps, mapDispatchToProps

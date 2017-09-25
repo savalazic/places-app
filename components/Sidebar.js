@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Filter from './Filter';
-
 const Sidebar = ({ children }) => (
   <div className="sidebar">
-    <Filter />
     {children}
   </div>
 );
