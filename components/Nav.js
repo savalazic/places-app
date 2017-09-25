@@ -7,6 +7,10 @@ Router.onRouteChangeStart = () => {
   NProgress.start();
 };
 
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
+
+
 const Nav = () => (
   <nav className="top-nav">
     <div className="brand">
