@@ -1,4 +1,6 @@
-# int-doobai-app
+# places-app
+
+> Frontend for graduation work application
 
 ## About
 
@@ -9,7 +11,7 @@ This project uses [Next.js](https://zeit.co/blog/next). Small framework for serv
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 2. Install your dependencies
   ```bash
-  cd path/to/int-doobai-app
+  cd path/to/places-app
   yarn
   ```
 3. Start your app
