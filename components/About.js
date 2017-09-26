@@ -8,7 +8,7 @@ const AboutComponent = () => (
       </div>
     </div>
     <div className="about-text">
-      <h1>Find a place to go whenever you want with <strong>Places</strong></h1>
+      <h1>Find awesome events in your city with <strong>Places</strong></h1>
     </div>
   </div>
 );

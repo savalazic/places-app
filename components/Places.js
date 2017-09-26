@@ -56,7 +56,7 @@ function getVisiblePlaces(showing, sorting, places) {
         return b.popularity - a.popularity;
       }
       if (sorting === 'distance') {
-        return b.distance - a.distance;
+        return a.distance - b.distance;
       }
     });
 }

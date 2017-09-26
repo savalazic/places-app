@@ -29,7 +29,7 @@ class Map extends Component {
     center: [20.494431799999998, 44.812046499999996],
     userPosition: [],
     hasPosition: false,
-    zoom: [10],
+    zoom: [13],
     popupShowLabel: true,
     mapStyle: styles.light,
   };
@@ -163,14 +163,12 @@ class Map extends Component {
                 popularity={this.props.selectedPlace.popularity}
                 handleBack={() => this.props.placeBack()}
               />
-              <SidebarSlider />
             </Sidebar>
           )
             : (
               <Sidebar>
                 <Filter />
                 <Places />
-                <SidebarSlider />
               </Sidebar>
             )
         }
