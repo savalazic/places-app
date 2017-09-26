@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+// mock data
+import placesData from '../data/places.json';
+import eventsData from '../data/events.json';
+
 import { selectPlace, placeBack } from '../actions';
 
 import { token, styles } from '../config.json';
@@ -100,6 +104,9 @@ class Map extends Component {
       zoom,
       mapStyle,
     } = this.state;
+
+    console.log(placesData);
+    console.log(eventsData);
 
     return (
       <div className="main">

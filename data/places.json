@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Brankow Club",
+    "type": "club",
+    "lat": 44.8147883,
+    "long": 20.4492903,
+    "city": "Belgrade",
+    "address": "Baba Visnjina 45",
+    "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima qui harum repudiandae, eligendi labore provident culpa commodi laboriosam deserunt fuga. Aut incidunt laudantium sequi quod minus! Est itaque corporis quisquam.",
+    "images": [
+      "https://static1.squarespace.com/static/55b7ea68e4b0be339cc75dad/t/55b805a8e4b0a6b779d3af11/1438123434780/Nightclub+Shooting+Lawsuit.jpg?format=1500w"
+    ],
+    "callNumber": "0637644874",
+    "workingTime": { "from": "14", "to": "06" },
+    "comments": [
+      {
+        "username": "Sava",
+        "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima qui harum repudiandae, eligendi labore provident culpa commodi laboriosam deserunt fuga. Aut incidunt laudantium sequi quod minus! Est itaque corporis quisquam"
+      },
+      {
+        "username": "Ceca",
+        "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima qui harum repudiandae, eligendi labore provident culpa commodi! Est itaque corporis quisquam"
+      }
+    ],
+    "events": []
+  }
+]
