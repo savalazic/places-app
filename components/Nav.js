@@ -33,6 +33,9 @@ class Nav extends Component {
           </Link>
         </div>
         <ul className="nav-menu">
+          <Link href="/">
+            <a className="nav-item">Home</a>
+          </Link>
           <Link href="/places">
             <a className="nav-item">Places</a>
           </Link>
