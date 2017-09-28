@@ -12,7 +12,6 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
 import PlaceAbout from '../components/PlaceAbout';
-import PlaceReview from '../components/PlaceReview';
 
 const HeaderMap = dynamic(
   import('../components/HeaderMap'),
@@ -20,8 +19,10 @@ const HeaderMap = dynamic(
     ssr: false,
     loading: () => {
       return (
-        <div className="loading">
+        <div className="header-loading">
           <div className="inner">
+            <div className="ball"></div>
+            Loading...
           </div>
         </div>
 
@@ -72,7 +73,6 @@ class PlacePage extends Component {
           <Nav />
           <HeaderMap center={[20.494431799999998, 44.812046499999996]} />
           <PlaceAbout />
-          <PlaceReview />
         </div>
       </MuiThemeProvider>
     );

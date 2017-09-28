@@ -19,6 +19,7 @@ const Map = dynamic(
       return (
         <div className="loading">
           <div className="inner">
+            Loading...
           </div>
         </div>
 
