@@ -4,41 +4,27 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { onSortingChange } from '../actions';
-import SidebarSelect from './SidebarSelect';
+import TypeSelect from './TypeSelect';
+import CitySelect from './CitySelect';
 
 const Filter = ({ onSortingChange, places }) => {
   return (
     <ul className="filter-container">
-      <li className="filter-heading">
-        <i
-          role="button"
-          tabIndex="0"
-          className={`icon location ${places.sorting === 'distance' ? 'active' : ''}`
-          }
-          onClick={() => {
-            onSortingChange('distance');
-          }}
-        />
-        <i
-          role="button"
-          tabIndex="0"
-          className={`icon popularity ${places.sorting === 'popularity' ? 'active' : ''}`
-          }
-          onClick={() => {
-            onSortingChange('popularity');
-          }}
-        />
-      </li>
       <li className="filter-showing">
-        <span>Showing:</span>
-        <SidebarSelect />
+        <div className="filter-item">
+          <span>City:</span>
+          <CitySelect />
+        </div>
+        <div className="filter-item">
+          <span>Type:</span>
+          <TypeSelect />
+        </div>
       </li>
     </ul>
   );
 };
 
 Filter.propTypes = {
-  onSortingChange: PropTypes.func.isRequired,
   places: PropTypes.shape({
     places: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,

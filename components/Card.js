@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Chart from './Chart';
 import config from '../config.json';
 
 const Card =
-  ({ id, type, image, popularity, name, street, distance, onClick }) => {
+  ({ id, type, image, popularity, name, street, distance, size, onClick }) => {
     let typeColor = '';
 
     if (type.toLowerCase() === 'bar') {
@@ -21,7 +20,7 @@ const Card =
     return (
       <div
         key={id}
-        className={`card ${type.trim().toLowerCase()}`}
+        className={`card ${size} ${type.trim().toLowerCase()}`}
         role="button"
         tabIndex="0"
         onClick={onClick}
@@ -33,13 +32,6 @@ const Card =
           }}
         />
         <div className="card-description">
-          <div className="card-chart">
-            <Chart
-              gradientSize={150}
-              chartColor={typeColor}
-              chartHeight={200}
-            />
-          </div>
           <p className="card-popularity">{popularity}%</p>
           <div className="card-info">
             <h3 className="card-name">{name}</h3>
@@ -61,6 +53,7 @@ Card.propTypes = {
   street: PropTypes.string.isRequired,
   distance: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
+  size: PropTypes.string.isRequired,
 };
 
 export default Card;

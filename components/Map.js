@@ -13,7 +13,7 @@ import { selectPlace, placeBack } from '../actions';
 import { token, styles } from '../config.json';
 
 import Sidebar from './Sidebar';
-import Places from './Places';
+import Events from './Events';
 import SelectedCard from './SelectedCard';
 import SidebarSlider from './SidebarSlider';
 import Filter from './Filter';
@@ -175,7 +175,7 @@ class Map extends Component {
             : (
               <Sidebar>
                 <Filter />
-                <Places />
+                <Events />
               </Sidebar>
             )
         }

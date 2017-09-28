@@ -7,12 +7,15 @@ import dynamic from 'next/dynamic';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
+import PlaceAbout from '../components/PlaceAbout';
+import PlaceReview from '../components/PlaceReview';
 
-const Map = dynamic(
-  import('../components/Map'),
+const HeaderMap = dynamic(
+  import('../components/HeaderMap'),
   {
     ssr: false,
     loading: () => {
@@ -45,8 +48,7 @@ const muiTheme = {
 };
 
 
-class IndexPage extends Component {
-
+class PlacePage extends Component {
   static getInitialProps({ req }) {
     // Ensures material-ui renders the correct css prefixes server-side
     let userAgent;
@@ -55,17 +57,22 @@ class IndexPage extends Component {
     } else {
       userAgent = req.headers['user-agent'];
     }
+
     return { userAgent };
   }
 
   render() {
+
     const { userAgent } = this.props;
+
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
         <div className="app">
           <Meta />
           <Nav />
-          <Map />
+          <HeaderMap center={[20.494431799999998, 44.812046499999996]} />
+          <PlaceAbout />
+          <PlaceReview />
         </div>
       </MuiThemeProvider>
     );
@@ -73,4 +80,4 @@ class IndexPage extends Component {
 }
 
 
-export default withRedux(initStore, null, null)(IndexPage); // store, mapStateToProps, mapDispatchToProps
+export default withRedux(initStore, null, null)(PlacePage); // store, mapStateToProps, mapDispatchToProps

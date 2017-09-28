@@ -30,7 +30,7 @@ const muiTheme = {
 };
 
 
-class About extends Component {
+class AboutPage extends Component {
 
   static getInitialProps({ req }) {
     // Ensures material-ui renders the correct css prefixes server-side
@@ -61,4 +61,4 @@ class About extends Component {
 }
 
 
-export default withRedux(initStore, null, null)(About); // store, mapStateToProps, mapDispatchToProps
+export default withRedux(initStore, null, null)(AboutPage); // store, mapStateToProps, mapDispatchToProps

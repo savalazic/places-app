@@ -1,41 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 
-import Card from '../components/Card';
-import Filter from '../components/Filter';
+import { selectPlace } from '../actions';
 
-class Places extends Component {
+import Card from './Card';
+
+class Events extends Component {
   componentDidUpdate() {
     forceCheck();
   }
 
   render() {
     return (
-      <div className="container siteWidth">
-        <div className="col col-12">
-          <h2 className="places-heading">Filter</h2>
-          <Filter />
-        </div>
+      <div className="places">
         {
           this.props.places.map(place => (
-            <div key={place.id} className="col col-4">
-              <LazyLoad key={place.id} height={400} once>
-                <Card
-                  key={place.id}
-                  id={place.id}
-                  type={place.type}
-                  image={place.image}
-                  popularity={place.popularity}
-                  name={place.name}
-                  street={place.street}
-                  distance={place.distance}
-                  onClick={() => console.log('click')}
-                  size={'large'}
-                />
-              </LazyLoad>
-            </div>
+            <LazyLoad key={place.id} height={160} once>
+              <Card
+                key={place.id}
+                id={place.id}
+                type={place.type}
+                image={place.image}
+                popularity={place.popularity}
+                name={place.name}
+                street={place.street}
+                distance={place.distance}
+                onClick={() => this.props.selectPlace(place)}
+                size={'small'}
+              />
+            </LazyLoad>
           ))
         }
       </div>
@@ -43,10 +39,10 @@ class Places extends Component {
   }
 }
 
-Places.propTypes = {
+Events.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectPlace: PropTypes.func.isRequired,
 };
-
 
 // Getting visible movies from state.
 function getVisiblePlaces(showing, sorting, places) {
@@ -73,4 +69,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(Places);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    selectPlace,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Events);

@@ -9,7 +9,7 @@ const categories = [
   'Bar',
 ];
 
-class SidebarSelect extends Component {
+class TypeSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,4 +78,4 @@ class SidebarSelect extends Component {
   }
 }
 
-export default SidebarSelect;
+export default TypeSelect;

@@ -9,6 +9,7 @@ body
   font-family $fontFamily
   font-size   $fontSize
   line-height $lineHeight
+  overflow-x hidden
 
   antialias()
 
@@ -18,6 +19,10 @@ body
 a
   text-decoration none
   color inherit
+  transition color 400ms
+
+  &:hover
+    color $primary
 
 img
   max-width 100%

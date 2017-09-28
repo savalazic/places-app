@@ -7,10 +7,11 @@ import dynamic from 'next/dynamic';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
-import AboutComponent from '../components/About';
+import Places from '../components/Places';
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -30,7 +31,7 @@ const muiTheme = {
 };
 
 
-class Places extends Component {
+class PlacesPage extends Component {
 
   static getInitialProps({ req }) {
     // Ensures material-ui renders the correct css prefixes server-side
@@ -53,20 +54,7 @@ class Places extends Component {
         <div className="app">
           <Meta />
           <Nav />
-          <div className="container siteWidth">
-            <div className="col col-4">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum, nihil velit, nostrum esse sequi adipisci quasi consectetur aliquam vero aliquid temporibus dolor veritatis sint beatae illo. Nam, facilis odio.</p>
-            </div>
-            <div className="col col-4">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum, nihil velit, nostrum esse sequi adipisci quasi consectetur aliquam vero aliquid temporibus dolor veritatis sint beatae illo. Nam, facilis odio.</p>
-            </div>
-            <div className="col col-4">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum, nihil velit, nostrum esse sequi adipisci quasi consectetur aliquam vero aliquid temporibus dolor veritatis sint beatae illo. Nam, facilis odio.</p>
-            </div>
-            <div className="col col-4">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur earum, nihil velit, nostrum esse sequi adipisci quasi consectetur aliquam vero aliquid temporibus dolor veritatis sint beatae illo. Nam, facilis odio.</p>
-            </div>
-          </div>
+          <Places />
         </div>
       </MuiThemeProvider>
     );
@@ -74,4 +62,4 @@ class Places extends Component {
 }
 
 
-export default withRedux(initStore, null, null)(Places); // store, mapStateToProps, mapDispatchToProps
+export default withRedux(initStore, null, null)(PlacesPage); // store, mapStateToProps, mapDispatchToProps

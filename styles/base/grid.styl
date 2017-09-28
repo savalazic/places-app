@@ -4,6 +4,7 @@
  */
 
 .container
+  position relative
   display flex
   flex-wrap wrap
   justify-content space-between
@@ -12,9 +13,6 @@
   &.siteWidth
     max-width $siteWidth
 
-  @media (max-width: $mobile)
-    display block
-
   .col
     flex 1
     padding 20px
@@ -22,8 +20,17 @@
     &.col-4
       width 33%
 
+    &.col-6
+      width 50%
+    
+    &.col-8
+      width 66.666667%
+
+    &.col-12
+      width 100%
+
     &[class*='col-']
-      flex none
+      flex auto
 
       @media (max-width: $mobile)
         width 100%

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Chart from './Chart';
 import config from '../config.json';
 
 const SelectedCard =
@@ -45,13 +44,6 @@ const SelectedCard =
             <div className="type">{type}</div>
           </div>
           <p className="popularity">{popularity}%</p>
-          <div className="chart">
-            <Chart
-              gradientSize={100}
-              chartColor={typeColor}
-              chartHeight={100}
-            />
-          </div>
           <p className="description-text">{desc}</p>
         </div>
       </div>

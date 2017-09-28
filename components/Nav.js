@@ -28,13 +28,16 @@ class Nav extends Component {
         <div className="brand">
           <Link href="/">
             <a>
-              <h3>PLACES</h3>
+              <h3>
+                <i className="icon location" />
+                <span>PLACES</span>
+              </h3>
             </a>
           </Link>
         </div>
         <ul className="nav-menu">
           <Link href="/">
-            <a className="nav-item">Home</a>
+            <a className="nav-item">Events</a>
           </Link>
           <Link href="/places">
             <a className="nav-item">Places</a>
@@ -56,42 +59,9 @@ class Nav extends Component {
             <span />
           </div>
         </div>
-      </nav>    
+      </nav>
     );
   }
 }
-
-// const Nav = () => (
-//   <nav className="top-nav">
-//     <div className="brand">
-//       <Link href="/">
-//         <a>
-//           <h3>PLACES</h3>
-//         </a>
-//       </Link>
-//     </div>
-//     <ul className="nav-menu">
-//       <Link href="/places">
-//         <a className="nav-item">Places</a>
-//       </Link>
-//       <Link href="/about">
-//         <a className="nav-item">About</a>
-//       </Link>
-//       <Link href="/faq">
-//         <a className="nav-item">FAQ</a>
-//       </Link>
-//       <Link href="/login">
-//         <a className="nav-item">Login</a>
-//       </Link>
-//     </ul>
-//     <div className="nav-button">
-//       <div className="mobile-btn">
-//         <span />
-//         <span />
-//         <span />
-//       </div>
-//     </div>
-//   </nav>
-// );
 
 export default Nav;
