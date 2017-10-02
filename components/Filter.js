@@ -7,7 +7,7 @@ import { onSortingChange } from '../actions';
 import TypeSelect from './TypeSelect';
 import CitySelect from './CitySelect';
 
-const Filter = ({ onSortingChange, places }) => {
+const Filter = ({ onSortingChange, events }) => {
   return (
     <ul className="filter-container">
       <li className="filter-showing">
@@ -25,14 +25,14 @@ const Filter = ({ onSortingChange, places }) => {
 };
 
 Filter.propTypes = {
-  places: PropTypes.shape({
-    places: PropTypes.arrayOf(PropTypes.object),
+  events: PropTypes.shape({
+    events: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    places: state.places,
+    events: state.events,
   };
 }
 

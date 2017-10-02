@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import PlaceReducer from './PlaceReducer';
-import SelectPlaceReducer from './SelectPlaceReducer';
+import EventReducer from './EventReducer';
+import SelectEventReducer from './SelectEventReducer';
 
 const rootReducer = combineReducers({
-  places: PlaceReducer,
-  selectedPlace: SelectPlaceReducer,
+  events: EventReducer,
+  selectedEvent: SelectEventReducer,
 });
 
 export default rootReducer;

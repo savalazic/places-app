@@ -1,13 +1,13 @@
-export function selectPlace(place) {
+export function selectEvent(event) {
   return {
-    type: 'PLACE_SELECTED',
-    payload: place,
+    type: 'EVENT_SELECTED',
+    payload: event,
   };
 }
 
-export function placeBack() {
+export function eventBack() {
   return {
-    type: 'PLACE_BACK',
+    type: 'EVENT_BACK',
     payload: null,
   };
 }

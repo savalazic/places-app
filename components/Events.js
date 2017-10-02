@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 
-import { selectPlace } from '../actions';
+import { selectEvent } from '../actions';
 
 import Card from './Card';
 
@@ -17,18 +17,18 @@ class Events extends Component {
     return (
       <div className="places">
         {
-          this.props.places.map(place => (
-            <LazyLoad key={place.id} height={160} once>
+          this.props.events.map(event => (
+            <LazyLoad key={event.id} height={160} once>
               <Card
-                key={place.id}
-                id={place.id}
-                type={place.type}
-                image={place.image}
-                popularity={place.popularity}
-                name={place.name}
-                street={place.street}
-                distance={place.distance}
-                onClick={() => this.props.selectPlace(place)}
+                key={event.id}
+                id={event.id}
+                type={event.type}
+                image={event.image}
+                popularity={event.popularity}
+                name={event.name}
+                street={event.street}
+                distance={event.distance}
+                onClick={() => this.props.selectEvent(event)}
                 size={'small'}
               />
             </LazyLoad>
@@ -40,17 +40,17 @@ class Events extends Component {
 }
 
 Events.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectPlace: PropTypes.func.isRequired,
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectEvent: PropTypes.func.isRequired,
 };
 
 // Getting visible movies from state.
-function getVisiblePlaces(showing, sorting, places) {
-  return places
-    .filter(place => (
-      (showing === 'all' || showing === place.type.toLowerCase())
-      // (type == 'all' || type == place.type) &&
-      // (rating == 'all' || rating == place.rating)
+function getVisiblePlaces(showing, sorting, events) {
+  return events
+    .filter(event => (
+      (showing === 'all' || showing === event.type.toLowerCase())
+      // (type == 'all' || type == event.type) &&
+      // (rating == 'all' || rating == event.rating)
     ))
     .sort((a, b) => {
       if (sorting === 'popularity') {
@@ -63,15 +63,15 @@ function getVisiblePlaces(showing, sorting, places) {
 }
 
 function mapStateToProps(state) {
-  const { showing, sorting, places } = state.places;
+  const { showing, sorting, events } = state.events;
   return {
-    places: getVisiblePlaces(showing, sorting, places),
+    events: getVisiblePlaces(showing, sorting, events),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    selectPlace,
+    selectEvent,
   }, dispatch);
 }
 

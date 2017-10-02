@@ -4,18 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-// mock data
-import placesData from '../data/places.json';
-import eventsData from '../data/events.json';
-
-import { selectPlace, placeBack } from '../actions';
+import { selectEvent, eventBack } from '../actions';
 
 import { token, styles } from '../config.json';
 
 import Sidebar from './Sidebar';
 import Events from './Events';
 import SelectedCard from './SelectedCard';
-import SidebarSlider from './SidebarSlider';
 import Filter from './Filter';
 
 const Mapbox = ReactMapboxGl({
@@ -53,9 +48,9 @@ class Map extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedPlace) {
+    if (nextProps.selectedEvent) {
       this.setState({
-        center: [nextProps.selectedPlace.long, nextProps.selectedPlace.lat],
+        center: [nextProps.selectedEvent.long, nextProps.selectedEvent.lat],
         zoom: [17],
       });
     }
@@ -86,10 +81,10 @@ class Map extends Component {
   }
 
   renderPins = () => {
-    this.props.places.map((place) => {
+    this.props.events.map((event) => {
       return (
         <Marker
-          coordinates={[place.long, place.lat]}
+          coordinates={[event.long, event.lat]}
           className="marker-container"
         >
           <UserMarker />
@@ -104,9 +99,6 @@ class Map extends Component {
       zoom,
       mapStyle,
     } = this.state;
-
-    console.log(placesData);
-    console.log(eventsData);
 
     return (
       <div className="main">
@@ -123,15 +115,15 @@ class Map extends Component {
         >
           {this.renderUserPin()}
           {
-            this.props.places.map(place => (
+            this.props.events.map(event => (
               <Marker
-                key={place.id}
-                coordinates={[place.long, place.lat]}
+                key={event.id}
+                coordinates={[event.long, event.lat]}
                 className="marker-container"
                 onClick={() => {
-                  this.props.selectPlace(place);
+                  this.props.selectEvent(event);
                   this.setState({
-                    center: [this.props.selectedPlace.long, this.props.selectedPlace.lat],
+                    center: [this.props.selectedEvent.long, this.props.selectedEvent.lat],
                     zoom: [17],
                   });
                 }}
@@ -141,15 +133,15 @@ class Map extends Component {
             ))
           }
           {
-            this.props.selectedPlace && (
+            this.props.selectedEvent && (
               <Popup
-                key={this.props.selectedPlace.id}
+                key={this.props.selectedEvent.id}
                 offset={[0, -50]}
-                coordinates={[this.props.selectedPlace.long, this.props.selectedPlace.lat]}
+                coordinates={[this.props.selectedEvent.long, this.props.selectedEvent.lat]}
               >
                 <div>
                   <div>
-                    {this.props.selectedPlace.name}
+                    {this.props.selectedEvent.name}
                   </div>
                 </div>
               </Popup>
@@ -159,16 +151,16 @@ class Map extends Component {
         </Mapbox>
 
         {
-          this.props.selectedPlace ? (
+          this.props.selectedEvent ? (
             <Sidebar>
               <SelectedCard
-                image={this.props.selectedPlace.image}
-                name={this.props.selectedPlace.name}
-                desc={this.props.selectedPlace.desc}
-                address={this.props.selectedPlace.street}
-                type={this.props.selectedPlace.type}
-                popularity={this.props.selectedPlace.popularity}
-                handleBack={() => this.props.placeBack()}
+                image={this.props.selectedEvent.image}
+                name={this.props.selectedEvent.name}
+                desc={this.props.selectedEvent.desc}
+                address={this.props.selectedEvent.street}
+                type={this.props.selectedEvent.type}
+                popularity={this.props.selectedEvent.popularity}
+                handleBack={() => this.props.eventBack()}
               />
             </Sidebar>
           )
@@ -185,12 +177,12 @@ class Map extends Component {
 }
 
 Map.defaultProps = {
-  selectedPlace: null,
+  selectedEvent: null,
 };
 
 Map.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedPlace: PropTypes.shape({
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedEvent: PropTypes.shape({
     id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -202,33 +194,33 @@ Map.propTypes = {
     popularity: PropTypes.number.isRequired,
     // people usually spend, string
   }),
-  placeBack: PropTypes.func.isRequired,
-  selectPlace: PropTypes.func.isRequired,
+  eventBack: PropTypes.func.isRequired,
+  selectEvent: PropTypes.func.isRequired,
 };
 
 // Getting visible movies from state.
-function getVisiblePlaces(showing, sorting, places) {
-  return places
-    .filter(place => (
-      (showing === 'all' || showing === place.type.toLowerCase())
-      // (year == 'all' || year == place.year) &&
-      // (type == 'all' || type == place.type) &&
-      // (rating == 'all' || rating == place.rating)
+function getVisibleEvents(showing, sorting, events) {
+  return events
+    .filter(event => (
+      (showing === 'all' || showing === event.type.toLowerCase())
+      // (year == 'all' || year == event.year) &&
+      // (type == 'all' || type == event.type) &&
+      // (rating == 'all' || rating == event.rating)
     ));
 }
 
 function mapStateToProps(state) {
-  const { showing, sorting, places } = state.places;
+  const { showing, sorting, events } = state.events;
   return {
-    places: getVisiblePlaces(showing, sorting, places),
-    selectedPlace: state.selectedPlace,
+    events: getVisibleEvents(showing, sorting, events),
+    selectedEvent: state.selectedEvent,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    selectPlace,
-    placeBack,
+    selectEvent,
+    eventBack,
   }, dispatch);
 }
 

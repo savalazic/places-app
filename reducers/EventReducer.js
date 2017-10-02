@@ -1,4 +1,4 @@
-const places = [
+const events = [
   {
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima qui harum repudiandae, eligendi labore provident culpa commodi laboriosam deserunt fuga. Aut incidunt laudantium sequi quod minus! Est itaque corporis quisquam.',
     distance: 5,
@@ -146,7 +146,7 @@ const places = [
 ];
 
 const initialState = {
-  places,
+  events,
   sorting: '',
   showing: 'all',
   filters: [
