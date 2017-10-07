@@ -64,8 +64,8 @@ const SelectedCard =
           <a className="description-action" href={`mailto:${email}`}>{email}</a>
           <div className="features">
             <ul>
-              {features.map(feature => (
-                <li className="feature">{feature}</li>
+              {features.map((feature, i) => (
+                <li key={i} className="feature">{feature}</li>
               ))}
             </ul>
           </div>
