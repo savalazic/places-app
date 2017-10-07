@@ -28,9 +28,11 @@ class Events extends Component {
                 key={event._id}
                 id={event._id}
                 type={event.place.category.name}
+                placeName={event.place.name}
                 image={event.place.images[0]}
                 name={event.name}
                 street={event.place.address}
+                date={event.date}
                 onClick={() => this.props.selectEvent(event)}
                 size={'small'}
               />

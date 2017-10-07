@@ -1,32 +1,13 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { initStore } from '../store';
 import withRedux from 'next-redux-wrapper';
-import dynamic from 'next/dynamic';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Meta from '../components/meta';
-import Nav from '../components/Nav';
-
-const Map = dynamic(
-  import('../components/Map'),
-  {
-    ssr: false,
-    loading: () => {
-      return (
-        <div className="loading">
-          <div className="inner">
-            Loading...
-          </div>
-        </div>
-
-      );
-    }
-  }
-);
+import Main from '../components/Main'; 
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -65,8 +46,7 @@ class IndexPage extends Component {
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
         <div className="app">
           <Meta />
-          <Nav />
-          <Map />
+          <Main />
         </div>
       </MuiThemeProvider>
     );

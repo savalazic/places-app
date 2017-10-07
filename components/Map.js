@@ -4,7 +4,6 @@ import ReactMapboxGl, { Layer, Feature, Popup, Marker } from 'react-mapbox-gl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import 'isomorphic-fetch';
 
 import { fetchEvents, selectEvent, eventBack } from '../actions';
 
@@ -22,7 +21,11 @@ const Mapbox = ReactMapboxGl({
 });
 
 const UserMarker = () => (
-  <div className="user-marker" />
+  <div className="marker user" />
+);
+
+const PlaceMarker = ({ type }) => (
+  <div className={`marker place ${type}`} />
 );
 
 class Map extends Component {
@@ -84,18 +87,24 @@ class Map extends Component {
     );
   }
 
-  renderPins = () => {
-    this.props.events.map((event) => {
-      return (
-        <Marker
-          coordinates={[event.place.lat, event.place.lng]}
-          className="marker-container"
-        >
-          <UserMarker />
-        </Marker>
-      );
-    });
-  }
+  renderPins = () => (
+    this.props.events.map(event => (
+      <Marker
+        key={event._id}
+        coordinates={[event.place.lat, event.place.lng]}
+        className="marker-container"
+        onClick={() => {
+          this.props.selectEvent(event);
+          this.setState({
+            center: [this.props.selectedEvent.place.lat, this.props.selectedEvent.place.lng],
+            zoom: [17],
+          });
+        }}
+      >
+        <PlaceMarker type={event.place.category.name} />
+      </Marker>
+    ))
+  )
 
   render() {
     const {
@@ -118,24 +127,7 @@ class Map extends Component {
           }}
         >
           {this.renderUserPin()}
-          {
-            this.props.events.map(event => (
-              <Marker
-                key={event._id}
-                coordinates={[event.place.lat, event.place.lng]}
-                className="marker-container"
-                onClick={() => {
-                  this.props.selectEvent(event);
-                  this.setState({
-                    center: [this.props.selectedEvent.place.lat, this.props.selectedEvent.place.lng],
-                    zoom: [17],
-                  });
-                }}
-              >
-                <UserMarker />
-              </Marker>
-            ))
-          }
+          {this.renderPins()}
           {
             this.props.selectedEvent && (
               <Popup
@@ -154,26 +146,6 @@ class Map extends Component {
 
         </Mapbox>
 
-        {
-          this.props.selectedEvent ? (
-            <Sidebar>
-              <SelectedCard
-                image={this.props.selectedEvent.place.images[0]}
-                name={this.props.selectedEvent.name}
-                desc={this.props.selectedEvent.description}
-                address={this.props.selectedEvent.place.address}
-                type={this.props.selectedEvent.place.category.name}
-                handleBack={() => this.props.eventBack()}
-              />
-            </Sidebar>
-          )
-            : (
-              <Sidebar>
-                <Filter />
-                <Events />
-              </Sidebar>
-            )
-        }
       </div>
     );
   }

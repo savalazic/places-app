@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import config from '../config.json';
 
 const Card =
-  ({ id, type, image, popularity, name, street, distance, size, onClick }) => {
+  ({ id, type, image, placeName, name, street, date, size, onClick }) => {
     let typeColor = '';
 
     if (type.toLowerCase() === 'bar') {
@@ -32,13 +32,13 @@ const Card =
           }}
         />
         <div className="card-description">
-          <p className="card-popularity">{popularity}%</p>
+          <p className="card-place">{placeName}</p>
           <div className="card-info">
             <h3 className="card-name">{name}</h3>
             <p className="card-address">{street}</p>
           </div>
           <p className="card-type">{type}</p>
-          <p className="card-distance">{distance} km</p>
+          <p className="card-date">{date.split('T')[0]}</p>
         </div>
       </div>
     );

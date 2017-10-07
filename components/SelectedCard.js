@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Slider from 'react-slick';
 
 import config from '../config.json';
 
+const settings = {
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  swipeToSlide: true,
+  speed: 500,
+  autoplay: true,
+};
+
 const SelectedCard =
-  ({ image, name, type, desc, popularity, address, handleBack }) => {
+  ({ images, name, type, desc, from, to, placeName, phone, email, features, address, handleBack }) => {
     let typeColor = '';
 
     if (type.toLowerCase() === 'bar') {
@@ -19,22 +29,23 @@ const SelectedCard =
 
     return (
       <div className={`selected-card ${type.trim().toLowerCase()}`}>
-        <div
-          className="image"
-          style={{
-            backgroundImage: `url(${image})`,
-          }}
-        >
+        <div className="images">
+          <Slider {...settings} >
+            {images.map((image, i) => (
+              <div
+                key={i}
+                className="image"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}
+              />
+            ))}
+          </Slider>
           <i
             className="icon back"
             role="button"
             tabIndex="0"
             onClick={handleBack}
-          />
-          <i
-            className="icon search"
-            role="button"
-            tabIndex="0"
           />
         </div>
         <div className="description">
@@ -43,8 +54,21 @@ const SelectedCard =
             <p className="address">{address}</p>
             <div className="type">{type}</div>
           </div>
-          <p className="popularity">{popularity}%</p>
+          <p className="placeName">{placeName}</p>
+          <div className="event-time">
+            <span className="from">{from}h</span> - <span className="to">{to}h</span>
+          </div>
           <p className="description-text">{desc}</p>
+          <h3>Contact</h3>
+          <a className="description-action" href={`tel:${phone}`}>{phone}</a>
+          <a className="description-action" href={`mailto:${email}`}>{email}</a>
+          <div className="features">
+            <ul>
+              {features.map(feature => (
+                <li className="feature">{feature}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     );

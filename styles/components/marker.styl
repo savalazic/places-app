@@ -1,0 +1,55 @@
+/**
+ * UserMarker
+ * ----------
+ */
+
+.marker
+  size 15px
+  border-radius 50%
+  cursor pointer
+
+  &:before
+  &:after
+    content ''
+    absolute 0
+    border-radius 50%
+    transition background 400ms
+
+  &:before
+    spring-in-place \
+      pulse 1500ms infinite, 5, 6, scale(0.95)
+
+  &:after
+    animate \
+      ripple 1500ms infinite easeOutCubic, 100% scale(1.8), opacity(0)
+
+
+  &.user
+    background $primary
+
+    &::before, &::after
+      background rgba($primary, .8)
+
+  &.club
+    background $club
+
+    &::before, &::after
+      background rgba($club, .8)
+
+  &.restaurant
+    background $restaurant
+
+    &::before, &::after
+      background rgba($restaurant, .8)
+
+  &.cafe
+    background $cafe
+
+    &::before, &::after
+      background rgba($cafe, .8)
+
+  &.bar
+    background $bar
+
+    &::before, &::after
+      background rgba($bar, .8)
