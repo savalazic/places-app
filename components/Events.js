@@ -1,14 +1,19 @@
+import includes from 'lodash/includes';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 
-import { selectEvent } from '../actions';
+import { selectEvent, fetchEvents } from '../actions';
 
 import Card from './Card';
 
 class Events extends Component {
+  componentDidMount() {
+    this.props.fetchEvents();
+  }
+
   componentDidUpdate() {
     forceCheck();
   }
@@ -18,16 +23,14 @@ class Events extends Component {
       <div className="places">
         {
           this.props.events.map(event => (
-            <LazyLoad key={event.id} height={160} once>
+            <LazyLoad key={event._id} height={160} once>
               <Card
-                key={event.id}
-                id={event.id}
-                type={event.type}
-                image={event.image}
-                popularity={event.popularity}
+                key={event._id}
+                id={event._id}
+                type={event.place.category.name}
+                image={event.place.images[0]}
                 name={event.name}
-                street={event.street}
-                distance={event.distance}
+                street={event.place.address}
                 onClick={() => this.props.selectEvent(event)}
                 size={'small'}
               />
@@ -44,13 +47,11 @@ Events.propTypes = {
   selectEvent: PropTypes.func.isRequired,
 };
 
-// Getting visible movies from state.
+// Getting visible events from state.
 function getVisiblePlaces(showing, sorting, events) {
   return events
     .filter(event => (
-      (showing === 'all' || showing === event.type.toLowerCase())
-      // (type == 'all' || type == event.type) &&
-      // (rating == 'all' || rating == event.rating)
+      includes(showing, event.place.category.name.toLowerCase()) || includes(showing, 'all')
     ))
     .sort((a, b) => {
       if (sorting === 'popularity') {
@@ -72,6 +73,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     selectEvent,
+    fetchEvents,
   }, dispatch);
 }
 

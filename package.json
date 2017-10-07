@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "autoprefixer": "^7.1.4",
+    "axios": "^0.16.2",
     "chart.js": "^2.7.0",
     "glob": "^7.1.2",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "mapbox-gl": "^0.39.1",
     "material-ui": "^0.19.1",
@@ -39,6 +41,7 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.0.4",
+    "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "slick-carousel": "^1.7.1",
     "stylus-mixer": "https://github.com/markoradak/stylus-mixer.git"

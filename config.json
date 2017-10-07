@@ -1,4 +1,5 @@
 {
+  "apiUrl": "http://localhost:4000/api",
   "token": "pk.eyJ1Ijoic2F2YWxhemljIiwiYSI6ImNqNjE3ZTl5dzB0OXYzMnE3bG1rZGloeTQifQ.fLNV-nXqEb2sclQrC5oiqg",
   "styles": {
     "light": "mapbox://styles/mapbox/light-v9",

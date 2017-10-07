@@ -1,10 +1,12 @@
+import includes from 'lodash/includes';
 import React, { Component } from 'react';
 import ReactMapboxGl, { Layer, Feature, Popup, Marker } from 'react-mapbox-gl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import 'isomorphic-fetch';
 
-import { selectEvent, eventBack } from '../actions';
+import { fetchEvents, selectEvent, eventBack } from '../actions';
 
 import { token, styles } from '../config.json';
 
@@ -34,6 +36,8 @@ class Map extends Component {
   };
 
   componentDidMount() {
+    this.props.fetchEvents();
+
     const geolocation = navigator.geolocation;
 
     geolocation.getCurrentPosition((position) => {
@@ -50,7 +54,7 @@ class Map extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedEvent) {
       this.setState({
-        center: [nextProps.selectedEvent.long, nextProps.selectedEvent.lat],
+        center: [nextProps.selectedEvent.place.lng, nextProps.selectedEvent.place.lat],
         zoom: [17],
       });
     }
@@ -84,7 +88,7 @@ class Map extends Component {
     this.props.events.map((event) => {
       return (
         <Marker
-          coordinates={[event.long, event.lat]}
+          coordinates={[event.place.lng, event.place.lat]}
           className="marker-container"
         >
           <UserMarker />
@@ -117,13 +121,13 @@ class Map extends Component {
           {
             this.props.events.map(event => (
               <Marker
-                key={event.id}
-                coordinates={[event.long, event.lat]}
+                key={event._id}
+                coordinates={[event.place.lng, event.place.lat]}
                 className="marker-container"
                 onClick={() => {
                   this.props.selectEvent(event);
                   this.setState({
-                    center: [this.props.selectedEvent.long, this.props.selectedEvent.lat],
+                    center: [this.props.selectedEvent.place.lng, this.props.selectedEvent.place.lat],
                     zoom: [17],
                   });
                 }}
@@ -135,9 +139,9 @@ class Map extends Component {
           {
             this.props.selectedEvent && (
               <Popup
-                key={this.props.selectedEvent.id}
+                key={this.props.selectedEvent._id}
                 offset={[0, -50]}
-                coordinates={[this.props.selectedEvent.long, this.props.selectedEvent.lat]}
+                coordinates={[this.props.selectedEvent.place.lng, this.props.selectedEvent.place.lat]}
               >
                 <div>
                   <div>
@@ -154,12 +158,11 @@ class Map extends Component {
           this.props.selectedEvent ? (
             <Sidebar>
               <SelectedCard
-                image={this.props.selectedEvent.image}
+                image={this.props.selectedEvent.place.images[0]}
                 name={this.props.selectedEvent.name}
-                desc={this.props.selectedEvent.desc}
-                address={this.props.selectedEvent.street}
-                type={this.props.selectedEvent.type}
-                popularity={this.props.selectedEvent.popularity}
+                desc={this.props.selectedEvent.description}
+                address={this.props.selectedEvent.place.address}
+                type={this.props.selectedEvent.place.category.name}
                 handleBack={() => this.props.eventBack()}
               />
             </Sidebar>
@@ -176,36 +179,32 @@ class Map extends Component {
   }
 }
 
-Map.defaultProps = {
-  selectedEvent: null,
-};
+// Map.defaultProps = {
+//   selectedEvent: null,
+// };
 
-Map.propTypes = {
-  events: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedEvent: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    long: PropTypes.number.isRequired,
-    lat: PropTypes.number.isRequired,
-    desc: PropTypes.string.isRequired,
-    street: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired, // array of strings
-    popularity: PropTypes.number.isRequired,
-    // people usually spend, string
-  }),
-  eventBack: PropTypes.func.isRequired,
-  selectEvent: PropTypes.func.isRequired,
-};
+// Map.propTypes = {
+//   events: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   selectedEvent: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     image: PropTypes.string.isRequired,
+//     name: PropTypes.string.isRequired,
+//     long: PropTypes.number.isRequired,
+//     lat: PropTypes.number.isRequired,
+//     desc: PropTypes.string.isRequired,
+//     street: PropTypes.string.isRequired,
+//     type: PropTypes.string.isRequired,
+//     popularity: PropTypes.number.isRequired,
+//   }),
+//   eventBack: PropTypes.func.isRequired,
+//   selectEvent: PropTypes.func.isRequired,
+// };
 
-// Getting visible movies from state.
+// Getting visible events from state.
 function getVisibleEvents(showing, sorting, events) {
   return events
     .filter(event => (
-      (showing === 'all' || showing === event.type.toLowerCase())
-      // (year == 'all' || year == event.year) &&
-      // (type == 'all' || type == event.type) &&
-      // (rating == 'all' || rating == event.rating)
+      includes(showing, event.place.category.name.toLowerCase()) || includes(showing, 'all')
     ));
 }
 
@@ -219,6 +218,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    fetchEvents,
     selectEvent,
     eventBack,
   }, dispatch);

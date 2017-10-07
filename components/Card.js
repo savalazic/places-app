@@ -44,16 +44,16 @@ const Card =
     );
   };
 
-Card.propTypes = {
-  id: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  popularity: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  street: PropTypes.string.isRequired,
-  distance: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-  size: PropTypes.string.isRequired,
-};
+// Card.propTypes = {
+//   id: PropTypes.string.isRequired,
+//   type: PropTypes.string.isRequired,
+//   image: PropTypes.string.isRequired,
+//   popularity: PropTypes.number.isRequired,
+//   name: PropTypes.string.isRequired,
+//   street: PropTypes.string.isRequired,
+//   distance: PropTypes.number.isRequired,
+//   onClick: PropTypes.func.isRequired,
+//   size: PropTypes.string.isRequired,
+// };
 
 export default Card;

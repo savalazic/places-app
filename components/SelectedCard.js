@@ -50,14 +50,14 @@ const SelectedCard =
     );
   };
 
-SelectedCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  popularity: PropTypes.number.isRequired,
-  handleBack: PropTypes.func.isRequired,
-};
+// SelectedCard.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   desc: PropTypes.string.isRequired,
+//   image: PropTypes.string.isRequired,
+//   address: PropTypes.string.isRequired,
+//   type: PropTypes.string.isRequired,
+//   popularity: PropTypes.number.isRequired,
+//   handleBack: PropTypes.func.isRequired,
+// };
 
 export default SelectedCard;

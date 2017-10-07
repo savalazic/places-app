@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import PropTypes from 'prop-types';
+
+import { onShowingChange } from '../actions';
 
 const categories = [
-  'Club',
-  'Restaurant',
-  'Cafe',
-  'Bar',
+  'club',
+  'restaurant',
+  'cafe',
+  'bar',
 ];
 
 class TypeSelect extends Component {
@@ -17,7 +22,15 @@ class TypeSelect extends Component {
     };
   }
 
-  handleChange = (event, index, values) => this.setState({ values });
+  handleChange = (event, index, values) => {
+    this.setState({ values }, () => {
+      if (this.state.values.length === 0) {
+        this.props.onShowingChange(['all']);
+      } else {
+        this.props.onShowingChange(this.state.values);
+      }
+    });
+  }
 
   menuItems = values => categories.map(val => (
     <MenuItem
@@ -78,4 +91,14 @@ class TypeSelect extends Component {
   }
 }
 
-export default TypeSelect;
+TypeSelect.propTypes = {
+  onShowingChange: PropTypes.func.isRequired,
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    onShowingChange,
+  }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(TypeSelect);
