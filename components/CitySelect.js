@@ -41,7 +41,7 @@ class CitySelect extends Component {
         <SelectField
           id="type-select"
           autoWidth
-          hintText="All"
+          hintText="Select city"
           value={values}
           onChange={this.handleChange}
           style={{

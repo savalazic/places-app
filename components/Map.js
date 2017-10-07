@@ -41,7 +41,7 @@ class Map extends Component {
     const geolocation = navigator.geolocation;
 
     geolocation.getCurrentPosition((position) => {
-      const userPosition = [position.coords.longitude, position.coords.latitude];
+      const userPosition = [position.coords.latitude, position.coords.longitude];
       this.setState({
         center: userPosition,
         userPosition,
@@ -54,7 +54,7 @@ class Map extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedEvent) {
       this.setState({
-        center: [nextProps.selectedEvent.place.lng, nextProps.selectedEvent.place.lat],
+        center: [nextProps.selectedEvent.place.lat, nextProps.selectedEvent.place.lng],
         zoom: [17],
       });
     }
@@ -88,7 +88,7 @@ class Map extends Component {
     this.props.events.map((event) => {
       return (
         <Marker
-          coordinates={[event.place.lng, event.place.lat]}
+          coordinates={[event.place.lat, event.place.lng]}
           className="marker-container"
         >
           <UserMarker />
@@ -122,12 +122,12 @@ class Map extends Component {
             this.props.events.map(event => (
               <Marker
                 key={event._id}
-                coordinates={[event.place.lng, event.place.lat]}
+                coordinates={[event.place.lat, event.place.lng]}
                 className="marker-container"
                 onClick={() => {
                   this.props.selectEvent(event);
                   this.setState({
-                    center: [this.props.selectedEvent.place.lng, this.props.selectedEvent.place.lat],
+                    center: [this.props.selectedEvent.place.lat, this.props.selectedEvent.place.lng],
                     zoom: [17],
                   });
                 }}
@@ -141,7 +141,7 @@ class Map extends Component {
               <Popup
                 key={this.props.selectedEvent._id}
                 offset={[0, -50]}
-                coordinates={[this.props.selectedEvent.place.lng, this.props.selectedEvent.place.lat]}
+                coordinates={[this.props.selectedEvent.place.lat, this.props.selectedEvent.place.lng]}
               >
                 <div>
                   <div>
