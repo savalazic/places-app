@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import PropTypes from 'prop-types';
+
+import { onShowingChangeCity } from '../actions';
 
 const categories = [
-  'Belgrade',
+  'Beograd',
   'Novi Sad',
   'Pancevo',
 ];
@@ -16,7 +21,13 @@ class CitySelect extends Component {
     };
   }
 
-  handleChange = (event, index, values) => this.setState({ values });
+  handleChange = (event, index, values) => {
+    this.setState({
+      values,
+    }, () => {
+      this.props.onShowingChangeCity(values);
+    });
+  }
 
   menuItems = values => categories.map(val => (
     <MenuItem
@@ -76,4 +87,14 @@ class CitySelect extends Component {
   }
 }
 
-export default CitySelect;
+CitySelect.propTypes = {
+  onShowingChangeCity: PropTypes.func.isRequired,
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    onShowingChangeCity,
+  }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(CitySelect);

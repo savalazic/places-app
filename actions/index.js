@@ -32,9 +32,16 @@ export function onSortingChange(sorting) {
   };
 }
 
-export function onShowingChange(showing) {
+export function onShowingChangeCity(showing) {
   return {
-    type: 'SET_SHOWING',
+    type: 'SET_SHOWING_CITY',
+    payload: showing,
+  };
+}
+
+export function onShowingChangeType(showing) {
+  return {
+    type: 'SET_SHOWING_TYPE',
     payload: showing,
   };
 }

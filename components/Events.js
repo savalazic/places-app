@@ -53,7 +53,8 @@ Events.propTypes = {
 function getVisiblePlaces(showing, sorting, events) {
   return events
     .filter(event => (
-      includes(showing, event.place.category.name.toLowerCase()) || includes(showing, 'all')
+      (includes(showing.type, event.place.category.name.toLowerCase()) || includes(showing.type, 'all')) &&
+      (showing.city === event.place.city)
     ))
     .sort((a, b) => {
       if (sorting === 'popularity') {

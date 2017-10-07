@@ -5,7 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
 
-import { onShowingChange } from '../actions';
+import { onShowingChangeType } from '../actions';
 
 const categories = [
   'club',
@@ -25,9 +25,9 @@ class TypeSelect extends Component {
   handleChange = (event, index, values) => {
     this.setState({ values }, () => {
       if (this.state.values.length === 0) {
-        this.props.onShowingChange(['all']);
+        this.props.onShowingChangeType(['all']);
       } else {
-        this.props.onShowingChange(this.state.values);
+        this.props.onShowingChangeType(this.state.values);
       }
     });
   }
@@ -92,12 +92,12 @@ class TypeSelect extends Component {
 }
 
 TypeSelect.propTypes = {
-  onShowingChange: PropTypes.func.isRequired,
+  onShowingChangeType: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    onShowingChange,
+    onShowingChangeType,
   }, dispatch);
 }
 
