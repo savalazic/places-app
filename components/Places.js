@@ -1,12 +1,20 @@
+import includes from 'lodash/includes';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LazyLoad, { forceCheck } from 'react-lazyload';
+
+import { fetchPlaces } from '../actions';
 
 import Card from '../components/Card';
 import Filter from '../components/Filter';
 
 class Places extends Component {
+  componentDidMount() {
+    this.props.fetchPlaces();
+  }
+
   componentDidUpdate() {
     forceCheck();
   }
@@ -20,17 +28,16 @@ class Places extends Component {
         </div>
         {
           this.props.places.map(place => (
-            <div key={place.id} className="col col-4">
-              <LazyLoad key={place.id} height={400} once>
+            <div key={place._id} className="col col-4">
+              <LazyLoad key={place._id} height={400} once>
                 <Card
-                  key={place.id}
-                  id={place.id}
-                  type={place.type}
-                  image={place.image}
-                  popularity={place.popularity}
+                  key={place._id}
+                  id={place._id}
+                  type={place.category.name}
+                  image={place.images[0]}
                   name={place.name}
-                  street={place.street}
-                  distance={place.distance}
+                  street={place.address}
+                  date={''}
                   onClick={() => console.log('click')}
                   size={'large'}
                 />
@@ -50,11 +57,11 @@ Places.propTypes = {
 
 // Getting visible movies from state.
 function getVisiblePlaces(showing, sorting, places) {
+  console.log(places);
   return places
     .filter(place => (
-      (showing === 'all' || showing === place.type.toLowerCase())
-      // (type == 'all' || type == place.type) &&
-      // (rating == 'all' || rating == place.rating)
+      (includes(showing.type, place.category.name.toLowerCase()) || includes(showing.type, 'all')) &&
+      (showing.city === place.city)
     ))
     .sort((a, b) => {
       if (sorting === 'popularity') {
@@ -73,4 +80,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(Places);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    fetchPlaces,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Places);

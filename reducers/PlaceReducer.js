@@ -1,5 +1,5 @@
-const initialEvents = {
-  events: [],
+const initialPlaces = {
+  places: [],
   sorting: '',
   showing: {
     type: ['all'],
@@ -7,12 +7,11 @@ const initialEvents = {
   },
 };
 
-
-export default function (state = initialEvents, action) {
+export default function (state = initialPlaces, action) {
   switch (action.type) {
-    case 'FETCH_EVENTS':
+    case 'FETCH_PLACES':
       return Object.assign({}, state, {
-        events: action.payload.data,
+        places: action.payload.data,
       });
     case 'SET_SHOWING_CITY':
       return {

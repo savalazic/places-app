@@ -38,6 +38,7 @@ $cardPadding = 20px
     .large&
       width 100%
       border-bottom-left-radius 0
+      height 250px
 
     @media (max-width: $mobile)
       display none
@@ -70,6 +71,10 @@ $cardPadding = 20px
     position relative
     height $cardHeight
 
+    .large&
+      width 100%
+      height 130px
+
     @media (max-width: $mobile)
       width 100%
 
@@ -80,7 +85,7 @@ $cardPadding = 20px
     position absolute
     top $cardPadding - 10
     left $cardPadding
-    font-size rem(32px)
+    font-size rem(25px)
     font-weight 200
     letter-spacing 2px
     color rgba($black, .5)
@@ -94,9 +99,17 @@ $cardPadding = 20px
       font-size rem(22px)
       line-height 1.5rem
 
+      .large&
+        font-size rem(40px)
+
     .card-address
-      font-size rem(10px)
+      font-size rem(12px)
       color rgba($black, .8)
+      
+      .large&
+        font-size rem(14px)
+        margin-left 2px
+        margin-top 5px
 
   .card-type
     position absolute

@@ -9,11 +9,6 @@ import { fetchEvents, selectEvent, eventBack } from '../actions';
 
 import { token, styles } from '../config.json';
 
-import Sidebar from './Sidebar';
-import Events from './Events';
-import SelectedCard from './SelectedCard';
-import Filter from './Filter';
-
 const Mapbox = ReactMapboxGl({
   minZoom: 10,
   maxZoom: 18,
@@ -61,6 +56,27 @@ class Map extends Component {
         zoom: [17],
       });
     }
+
+    // if (nextProps.selectedCity) {
+    //   console.log('brate haos');
+    //   this.setState({
+    //     center: [50, 50],
+    //   });
+    // }
+
+    // if (this.props.selectedCity === 'Beograd') {
+    //   this.setState((prevState, props) => {
+    //     return {
+    //       center: [20.494431799999998, 44.812046499999996],
+    //     };
+    //   });
+    // } else if (this.props.selectedCity === 'Novi Sad') {
+    //   this.setState((prevState, props) => {
+    //     return {
+    //       center: [19.8335496, 45.2671352],
+    //     };
+    //   });
+    // }
   }
 
   onToggleHover = (cursor, { map }) => {
@@ -186,6 +202,7 @@ function mapStateToProps(state) {
   return {
     events: getVisibleEvents(showing, sorting, events),
     selectedEvent: state.selectedEvent,
+    selectedCity: showing.city,
   };
 }
 
