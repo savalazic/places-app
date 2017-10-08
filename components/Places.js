@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LazyLoad, { forceCheck } from 'react-lazyload';
+import Link from 'next/link';
 
 import { fetchPlaces } from '../actions';
 
@@ -30,17 +31,19 @@ class Places extends Component {
           this.props.places.map(place => (
             <div key={place._id} className="col col-4">
               <LazyLoad key={place._id} height={400} once>
-                <Card
-                  key={place._id}
-                  id={place._id}
-                  type={place.category.name}
-                  image={place.images[0]}
-                  name={place.name}
-                  street={place.address}
-                  date={''}
-                  onClick={() => console.log('click')}
-                  size={'large'}
-                />
+                <Link href={`places/${place._id}`}>
+                  <Card
+                    key={place._id}
+                    id={place._id}
+                    type={place.category.name}
+                    image={place.images[0]}
+                    name={place.name}
+                    street={place.address}
+                    date={''}
+                    onClick={() => console.log('click')}
+                    size={'large'}
+                  />
+                </Link>
               </LazyLoad>
             </div>
           ))
@@ -57,7 +60,6 @@ Places.propTypes = {
 
 // Getting visible movies from state.
 function getVisiblePlaces(showing, sorting, places) {
-  console.log(places);
   return places
     .filter(place => (
       (includes(showing.type, place.category.name.toLowerCase()) || includes(showing.type, 'all')) &&

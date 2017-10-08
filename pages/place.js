@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { initStore } from '../store';
 import withRedux from 'next-redux-wrapper';
-import dynamic from 'next/dynamic';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -11,25 +10,7 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
-import PlaceAbout from '../components/PlaceAbout';
-
-const HeaderMap = dynamic(
-  import('../components/HeaderMap'),
-  {
-    ssr: false,
-    loading: () => {
-      return (
-        <div className="header-loading">
-          <div className="inner">
-            <div className="ball"></div>
-            Loading...
-          </div>
-        </div>
-
-      );
-    }
-  }
-);
+import SinglePlace from '../components/SinglePlace';
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -71,8 +52,7 @@ class PlacePage extends Component {
         <div className="app">
           <Meta />
           <Nav />
-          <HeaderMap center={[20.494431799999998, 44.812046499999996]} />
-          <PlaceAbout />
+          <SinglePlace />
         </div>
       </MuiThemeProvider>
     );
