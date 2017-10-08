@@ -1,13 +1,12 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-import { initStore } from '../store';
 import withRedux from 'next-redux-wrapper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { initStore } from '../store';
 
 import Meta from '../components/meta';
-import Main from '../components/Main'; 
+import Main from '../components/Main';
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -20,10 +19,10 @@ const muiTheme = {
   fontSize: 14,
   fontFamily: 'Dubai, sans-serif',
   menuItem: {
-    selectedTextColor: 'rgba(0,0,0,1)'
+    selectedTextColor: 'rgba(0,0,0,1)',
   },
   palette: {
-  }
+  },
 };
 
 

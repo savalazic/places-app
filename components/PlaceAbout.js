@@ -33,7 +33,7 @@ const settings = {
   }],
 };
 
-const PlaceAbout = ({ name, description, rating, type, address, phone, email, workingFrom, workingTo, features, images }) => (
+const PlaceAbout = ({ name, description, rating, type, address, phone, email, workingFrom, workingTo, features, images, fbLink }) => (
   <div className="place-about">
     <div className="container siteWidth">
       <div className="contact">
@@ -83,7 +83,7 @@ const PlaceAbout = ({ name, description, rating, type, address, phone, email, wo
       </div>
       <div className="col col-12">
         <FacebookProvider appId="121645921818117">
-          <Like href="#fbLinkToPlace" colorScheme="dark" showFaces share />
+          <Like href={`${fbLink}`} colorScheme="dark" showFaces share />
         </FacebookProvider>
       </div>
     </div>

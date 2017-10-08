@@ -10,11 +10,11 @@ const Mapbox = ReactMapboxGl({
   accessToken: token,
 });
 
-const UserMarker = () => (
-  <div className="user-marker" />
+const PlaceMarker = ({ type }) => (
+  <div className={`marker place ${type}`} />
 );
 
-const HeaderMap = ({ center }) => (
+const HeaderMap = ({ center, type }) => (
   <div className="header-map">
     <Mapbox
       style={styles.light}
@@ -29,7 +29,7 @@ const HeaderMap = ({ center }) => (
         coordinates={center}
         className="marker-container"
       >
-        <UserMarker />
+        <PlaceMarker type={type} />
       </Marker>
     </Mapbox>
   </div>

@@ -1,16 +1,30 @@
-/* eslint-disable */
+import fetch from 'isomorphic-fetch';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { initStore } from '../store';
 import withRedux from 'next-redux-wrapper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import LazyLoad, { forceCheck } from 'react-lazyload';
+import dynamic from 'next/dynamic';
+
+import { initStore } from '../store';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
-import SinglePlace from '../components/SinglePlace';
+import PlaceAbout from '../components/PlaceAbout';
+
+const HeaderMap = dynamic(
+  import('../components/HeaderMap'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="header-loading">
+        <div className="inner">
+          Loading...
+        </div>
+      </div>
+    ),
+  }
+);
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -23,10 +37,10 @@ const muiTheme = {
   fontSize: 14,
   fontFamily: 'Dubai, sans-serif',
   menuItem: {
-    selectedTextColor: 'rgba(0,0,0,1)'
+    selectedTextColor: 'rgba(0,0,0,1)',
   },
   palette: {
-  }
+  },
 };
 
 
@@ -44,20 +58,46 @@ class PlacePage extends Component {
   }
 
   render() {
-
-    const { userAgent } = this.props;
+    const { userAgent, place } = this.props;
+    console.log(place);
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
         <div className="app">
           <Meta />
           <Nav />
-          <SinglePlace />
+          <HeaderMap 
+            center={[place.lat, place.lng]}
+            type={place.category.name}
+          />
+          <PlaceAbout
+            name={place.name}
+            description={place.description}
+            rating={4}
+            type={place.category.name}
+            address={place.address}
+            phone={place.telephone}
+            email={place.email}
+            workingFrom={place.from}
+            workingTo={place.to}
+            features={place.features}
+            images={place.images}
+            fbLink={place.fbLink}
+          />
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
+function getPlace(slug) {
+  return fetch(`http://localhost:4000/api/places/${slug}`);
+}
+
+PlacePage.getInitialProps = async ({ query }) => {
+  const res = await getPlace(query.slug);
+  const json = await res.json();
+  return { place: json };
+};
 
 export default withRedux(initStore, null, null)(PlacePage); // store, mapStateToProps, mapDispatchToProps

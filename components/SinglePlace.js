@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
 
 import PlaceAbout from './PlaceAbout';
 
@@ -20,8 +19,6 @@ const HeaderMap = dynamic(
 
 class SinglePlace extends Component {
   componentDidMount() {
-    const request = axios.get('http://localhost:4000/places/59d983f6df54a901f9658da2');
-    request.then(data => console.log(data));
   }
 
   render() {

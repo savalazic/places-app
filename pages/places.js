@@ -1,13 +1,10 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { initStore } from '../store';
 import withRedux from 'next-redux-wrapper';
-import dynamic from 'next/dynamic';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import LazyLoad, { forceCheck } from 'react-lazyload';
+
+import { initStore } from '../store';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
@@ -24,15 +21,14 @@ const muiTheme = {
   fontSize: 14,
   fontFamily: 'Dubai, sans-serif',
   menuItem: {
-    selectedTextColor: 'rgba(0,0,0,1)'
+    selectedTextColor: 'rgba(0,0,0,1)',
   },
   palette: {
-  }
+  },
 };
 
 
 class PlacesPage extends Component {
-
   static getInitialProps({ req }) {
     // Ensures material-ui renders the correct css prefixes server-side
     let userAgent;
@@ -46,7 +42,6 @@ class PlacesPage extends Component {
   }
 
   render() {
-
     const { userAgent } = this.props;
 
     return (
