@@ -45,9 +45,6 @@ class Nav extends Component {
           <Link href="/about">
             <a className="nav-item">About</a>
           </Link>
-          <Link href="/faq">
-            <a className="nav-item">FAQ</a>
-          </Link>
           <Link href="/login">
             <a className="nav-item">Login</a>
           </Link>
