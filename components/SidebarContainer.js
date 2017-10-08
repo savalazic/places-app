@@ -36,6 +36,7 @@ class SidebarContainer extends Component {
                 to={this.props.selectedEvent.to}
                 address={this.props.selectedEvent.place.address}
                 type={this.props.selectedEvent.place.category.name}
+                placeDesc={this.props.selectedEvent.place.description}
                 phone={this.props.selectedEvent.place.telephone}
                 email={this.props.selectedEvent.place.email}
                 features={this.props.selectedEvent.place.features}

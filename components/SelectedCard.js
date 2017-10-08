@@ -14,7 +14,7 @@ const settings = {
 };
 
 const SelectedCard =
-  ({ images, name, type, desc, from, to, placeName, phone, email, features, address, handleBack }) => {
+  ({ images, name, type, desc, placeDesc, from, to, placeName, phone, email, features, address, handleBack }) => {
     let typeColor = '';
 
     if (type.toLowerCase() === 'bar') {
@@ -62,6 +62,8 @@ const SelectedCard =
           <h3>Contact</h3>
           <a className="description-action" href={`tel:${phone}`}>{phone}</a>
           <a className="description-action" href={`mailto:${email}`}>{email}</a>
+          <h3>About</h3>
+          <p className="description-place">{placeDesc}</p>
           <div className="features">
             <ul>
               {features.map((feature, i) => (
