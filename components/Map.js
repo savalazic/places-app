@@ -58,7 +58,6 @@ class Map extends Component {
     }
 
     // if (nextProps.selectedCity) {
-    //   console.log('brate haos');
     //   this.setState({
     //     center: [50, 50],
     //   });

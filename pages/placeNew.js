@@ -8,6 +8,7 @@ import { initStore } from '../store';
 
 import Meta from '../components/meta';
 import Nav from '../components/Nav';
+import PlaceNew from '../components/PlaceNew';
 
 // Make sure react-tap-event-plugin only gets injected once
 // Needed for material-ui
@@ -48,7 +49,9 @@ class PlaceNewPage extends Component {
         <div className="app">
           <Meta />
           <Nav />
-          <h1>New</h1>
+          <div className="container siteWidth">
+            <PlaceNew />
+          </div>
         </div>
       </MuiThemeProvider>
     );

@@ -41,7 +41,6 @@ class Places extends Component {
                     name={place.name}
                     street={place.address}
                     date={''}
-                    onClick={() => console.log('click')}
                     size={'large'}
                   />
                 </Link>

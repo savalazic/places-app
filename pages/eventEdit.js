@@ -58,7 +58,6 @@ class EventEditPage extends Component {
 
   render() {
     const { userAgent, place } = this.props;
-    console.log(place);
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>

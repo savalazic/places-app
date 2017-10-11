@@ -47,7 +47,6 @@ class AdminEvents extends Component {
                     name={event.name}
                     street={event.place.address}
                     date={''}
-                    onClick={() => console.log('click')}
                     size={'large'}
                   />
                 </Link>
