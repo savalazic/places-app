@@ -1,0 +1,31 @@
+/**
+ * AdminSidebar
+ * ----------
+ */
+
+.admin-sidebar
+  position fixed
+  left 0
+  top 0
+  bottom 0
+  height 100vh
+  width 300px
+  background $white
+  box-shadow $shadow
+  padding-top 100px
+  padding-bottom 30px
+
+  @media (max-width: $mobile)
+    position relative
+    bottom auto
+    width 100%
+    height 100%
+
+  h3 
+    text-align center
+    margin-bottom 30px
+
+  .sidebar-btn
+    &.active
+      color $white !important
+      background $primary !important
