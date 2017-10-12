@@ -47,6 +47,7 @@ class Events extends Component {
 Events.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectEvent: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func.isRequired,
 };
 
 // Getting visible events from state.

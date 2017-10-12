@@ -49,7 +49,7 @@ class PlaceNewPage extends Component {
         <div className="app">
           <Meta />
           <Nav />
-          <div className="container siteWidth">
+          <div className="container">
             <PlaceNew />
           </div>
         </div>

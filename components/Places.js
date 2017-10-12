@@ -55,6 +55,7 @@ class Places extends Component {
 
 Places.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fetchPlaces: PropTypes.func.isRequired,
 };
 
 // Getting visible movies from state.

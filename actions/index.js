@@ -19,6 +19,14 @@ export function fetchPlaces() {
   };
 }
 
+export function createPlace(values) {
+  const request = axios.post(`${API_URL}/places`, values);
+  return {
+    type: 'CREATE_PLACE',
+    payload: request,
+  }
+}
+
 export function selectEvent(event) {
   return {
     type: 'EVENT_SELECTED',

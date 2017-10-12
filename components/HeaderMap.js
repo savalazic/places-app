@@ -37,6 +37,11 @@ const HeaderMap = ({ center, type }) => (
 
 HeaderMap.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  type: PropTypes.string.isRequired,
+};
+
+PlaceMarker.propTypes = {
+  type: PropTypes.string.isRequired,
 };
 
 export default HeaderMap;
