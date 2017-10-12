@@ -1,10 +1,14 @@
 import fetch from 'isomorphic-fetch';
 import React, { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
+import { bindActionCreators } from 'redux';
+import Router from 'next/router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import dynamic from 'next/dynamic';
+
+import { deleteEvent } from '../actions';
 
 import { initStore } from '../store';
 
@@ -56,8 +60,16 @@ class EventEditPage extends Component {
     return { userAgent };
   }
 
+  onDelete = () => {
+    console.log(this.props.event._id);
+    const id = this.props.event._id;
+    this.props.deleteEvent(id, () => {
+      Router.push('/admin');
+    });
+  }
+
   render() {
-    const { userAgent, place } = this.props;
+    const { userAgent, event } = this.props;
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent, ...muiTheme })}>
@@ -69,6 +81,7 @@ class EventEditPage extends Component {
           <h1>EDIT</h1>
           <h1>EDIT</h1>
           <h1>EDIT</h1>
+          <button onClick={this.onDelete}>REMOVEE</button>
         </div>
       </MuiThemeProvider>
     );
@@ -82,7 +95,7 @@ function getPlace(slug) {
 EventEditPage.getInitialProps = async ({ query }) => {
   const res = await getPlace(query.slug);
   const json = await res.json();
-  return { place: json };
+  return { event: json };
 };
 
-export default withRedux(initStore, null, null)(EventEditPage); // store, mapStateToProps, mapDispatchToProps
+export default withRedux(initStore, null, { deleteEvent })(EventEditPage); // store, mapStateToProps, mapDispatchToProps

@@ -24,7 +24,27 @@ export function createPlace(values) {
   return {
     type: 'CREATE_PLACE',
     payload: request,
-  }
+  };
+}
+
+export function deleteEvent(id, callback) {
+  const request = axios.delete(`${API_URL}/events/${id}`)
+    .then(() => callback());
+
+  return {
+    type: 'DELETE_EVENT',
+    payload: id,
+  };
+}
+
+export function deletePlace(id, callback) {
+  const request = axios.delete(`${API_URL}/places/${id}`)
+    .then(() => callback());
+
+  return {
+    type: 'DELETE_PLACE',
+    payload: id,
+  };
 }
 
 export function selectEvent(event) {

@@ -1,10 +1,14 @@
 import fetch from 'isomorphic-fetch';
 import React, { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
+import { bindActionCreators } from 'redux';
+import Router from 'next/router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import dynamic from 'next/dynamic';
+
+import { deletePlace } from '../actions';
 
 import { initStore } from '../store';
 
@@ -56,6 +60,14 @@ class PlaceEditPage extends Component {
     return { userAgent };
   }
 
+  onDelete = () => {
+    console.log(this.props.place._id);
+    const id = this.props.place._id;
+    this.props.deletePlace(id, () => {
+      Router.push('/admin');
+    });
+  }
+
   render() {
     const { userAgent, place } = this.props;
 
@@ -69,6 +81,7 @@ class PlaceEditPage extends Component {
           <h1>EDIT</h1>
           <h1>EDIT</h1>
           <h1>EDIT</h1>
+          <button onClick={this.onDelete}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui est quaerat rem expedita recusandae doloribus! Nobis nulla eligendi at ex omnis. Voluptate nostrum dolores fugit quis tempora. Dolorem, accusamus alias.</button>
         </div>
       </MuiThemeProvider>
     );
@@ -85,4 +98,4 @@ PlaceEditPage.getInitialProps = async ({ query }) => {
   return { place: json };
 };
 
-export default withRedux(initStore, null, null)(PlaceEditPage); // store, mapStateToProps, mapDispatchToProps
+export default withRedux(initStore, null, { deletePlace })(PlaceEditPage); // store, mapStateToProps, mapDispatchToProps
