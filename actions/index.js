@@ -47,6 +47,27 @@ export function deleteEvent(id, callback) {
   };
 }
 
+export function editEvent(id, values, callback) {
+  const request = axios.put(`${API_URL}/events/${id}`, values)
+    .then(() => callback());
+
+  return {
+    type: 'EDIT_EVENT',
+    payload: request,
+  };
+}
+
+export function editPlace(id, values, callback) {
+  console.log('edit');
+  const request = axios.put(`${API_URL}/places/${id}`, values)
+    .then(() => callback());
+
+  return {
+    type: 'EDIT_PLACE',
+    payload: request,
+  };
+}
+
 export function deletePlace(id, callback) {
   const request = axios.delete(`${API_URL}/places/${id}`)
     .then(() => callback());

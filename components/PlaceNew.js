@@ -138,8 +138,8 @@ class PlaceNew extends Component {
     delete values.image3;
     delete values.image4;
 
-    values.lng = this.state.userPosition[0];
-    values.lat = this.state.userPosition[1];
+    values.lng = this.state.userPosition[1];
+    values.lat = this.state.userPosition[0];
 
     const features = [];
 

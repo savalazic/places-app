@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
@@ -8,18 +9,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { deleteEvent, fetchEvents } from '../actions';
+import config from '../config.json';
+const API_URL = config.apiUrl;
+
+import { deleteEvent, editEvent } from '../actions';
 
 import asyncValidate from '../util//asyncValidate';
 
 const validate = (values) => {
   const errors = {};
-  const requiredFields = [
-    'name',
-    'from',
-    'to',
-    'description',
-  ];
+  const requiredFields = [];
   requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = 'Required';
@@ -65,20 +64,35 @@ const renderSelectField = ({
   />);
 
 class EventEdit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { id: '' };
+  }
+
   componentDidMount() {
-    this.props.fetchEvents();
+    const id = window.location.pathname.split('/')[2];
+    this.setState({ id });
+
+    const request = axios.get(`${API_URL}/events/${id}`)
+      .then((e) => {
+        console.log(e.data);
+        this.props.initialValues.name = e.data.name;
+        this.props.initialValues.from = e.data.from;
+        this.props.initialValues.to = e.data.to;
+        this.props.initialValues.description = e.data.description;
+      });
   }
 
   onDelete = () => {
-    console.log(this.props.event._id);
-    // const id = this.props.event._id;
-    // this.props.deleteEvent(id, () => {
-    //   Router.push('/admin');
-    // });
+    const id = window.location.pathname.split('/')[2];
+    this.props.deleteEvent(id, () => {
+      Router.push('/admin');
+    });
   }
 
   onSubmit = (values) => {
-    this.props.createEvent(values, () => {
+    const id = window.location.pathname.split('/')[2];
+    this.props.editEvent(id, values, () => {
       Router.push('/admin');
     });
   }
@@ -87,7 +101,7 @@ class EventEdit extends Component {
     const { handleSubmit, pristine, reset, submitting, places } = this.props;
 
     return (
-      <div className="post-new">
+      <div className="post-new container formWidth">
         <h1>Edit event</h1>
         <form className="post-form" onSubmit={handleSubmit(this.onSubmit)}>
           <div className="fields">
@@ -96,6 +110,7 @@ class EventEdit extends Component {
                 name="name"
                 component={renderTextField}
                 label="Name"
+                fullWidth
               />
             </div>
             <div>
@@ -103,6 +118,7 @@ class EventEdit extends Component {
                 name="from"
                 component={renderTextField}
                 label="From"
+                fullWidth
               />
             </div>
             <div>
@@ -110,6 +126,7 @@ class EventEdit extends Component {
                 name="to"
                 component={renderTextField}
                 label="To"
+                fullWidth
               />
             </div>
             <div>
@@ -119,6 +136,7 @@ class EventEdit extends Component {
                 label="Description"
                 multiLine
                 rows={3}
+                fullWidth
               />
             </div>
             <div className="form-buttons">
@@ -157,11 +175,8 @@ export default reduxForm({
   form: 'EventEdit',
   validate,
   asyncValidate,
-  initialValues: {
-    name: 'Test',
-    from: 10,
-  },
+  initialValues: {},
   enableReinitialize: true,
 })(
-  connect(null, { fetchEvents, deleteEvent })(EventEdit)
+  connect(null, { editEvent, deleteEvent })(EventEdit)
 );

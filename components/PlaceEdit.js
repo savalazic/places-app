@@ -1,28 +1,24 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import Router from 'next/router';
-import RaisedButton from 'material-ui/RaisedButton';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createEvent, fetchPlaces } from '../actions';
+import config from '../config.json';
+const API_URL = config.apiUrl;
+
+import { deletePlace, editPlace } from '../actions';
 
 import asyncValidate from '../util//asyncValidate';
 
 const validate = (values) => {
   const errors = {};
-  const requiredFields = [
-    'name',
-    'from',
-    'to',
-    'description',
-    'place',
-  ];
+  const requiredFields = [];
   requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = 'Required';
@@ -51,21 +47,6 @@ const renderTextField = ({
     {...custom}
   />);
 
-const renderCheckbox = ({ input, label }) =>
-  (<Checkbox
-    label={label}
-    checked={input.value ? true : false}
-    onCheck={input.onChange}
-  />);
-
-const renderRadioGroup = ({ input, ...rest }) =>
-  (<RadioButtonGroup
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-  />);
-
 const renderSelectField = ({
   input,
   label,
@@ -82,13 +63,38 @@ const renderSelectField = ({
     {...custom}
   />);
 
-class EventNew extends Component {
+class PlaceEdit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { id: '' };
+  }
+
   componentDidMount() {
-    this.props.fetchPlaces();
+    const id = window.location.pathname.split('/')[2];
+    this.setState({ id });
+
+    const request = axios.get(`${API_URL}/places/${id}`)
+      .then((e) => {
+        this.props.initialValues.name = e.data.name;
+        this.props.initialValues.from = e.data.from;
+        this.props.initialValues.to = e.data.to;
+        this.props.initialValues.description = e.data.description;
+        this.props.initialValues.email = e.data.email;
+        this.props.initialValues.telephone = e.data.telephone;
+        this.props.initialValues.fbLink = e.data.fbLink;
+      });
+  }
+
+  onDelete = () => {
+    const id = window.location.pathname.split('/')[2];
+    this.props.deletePlace(id, () => {
+      Router.push('/admin');
+    });
   }
 
   onSubmit = (values) => {
-    this.props.createEvent(values, () => {
+    const id = window.location.pathname.split('/')[2];
+    this.props.editPlace(id, values, () => {
       Router.push('/admin');
     });
   }
@@ -98,7 +104,7 @@ class EventNew extends Component {
 
     return (
       <div className="post-new container formWidth">
-        <h1>Add new event</h1>
+        <h1>Edit place</h1>
         <form className="post-form" onSubmit={handleSubmit(this.onSubmit)}>
           <div className="fields">
             <div>
@@ -106,6 +112,34 @@ class EventNew extends Component {
                 name="name"
                 component={renderTextField}
                 label="Name"
+                fullWidth
+              />
+            </div>
+            <div>
+              <Field
+                name="city"
+                component={renderSelectField}
+                label="City"
+                fullWidth
+              >
+                <MenuItem value="Beograd" primaryText="Beograd" />
+                <MenuItem value="Novi Sad" primaryText="Novi Sad" />
+                <MenuItem value="Pancevo" primaryText="Pancevo" />
+              </Field>
+            </div>
+            <div>
+              <Field
+                name="email"
+                component={renderTextField}
+                label="Email"
+                fullWidth
+              />
+            </div>
+            <div>
+              <Field
+                name="telephone"
+                component={renderTextField}
+                label="Phone"
                 fullWidth
               />
             </div>
@@ -135,20 +169,6 @@ class EventNew extends Component {
                 fullWidth
               />
             </div>
-            <div>
-              <Field
-                name="place"
-                component={renderSelectField}
-                label="Place"
-                fullWidth
-              >
-                {
-                  places.map(place => (
-                    <MenuItem value={`${place._id}`} primaryText={`${place.name}`} />
-                  ))
-                }
-              </Field>
-            </div>
             <div className="form-buttons">
               <RaisedButton
                 type="submit"
@@ -166,6 +186,14 @@ class EventNew extends Component {
                 fullWidth
               />
             </div>
+            <RaisedButton
+              label="Remove"
+              onClick={this.onDelete}
+              fullWidth
+              style={{
+                marginTop: 10,
+              }}
+            />
           </div>
         </form>
       </div>
@@ -173,16 +201,12 @@ class EventNew extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    places: state.places.places,
-  };
-}
-
 export default reduxForm({
-  form: 'EventNew',
+  form: 'PlaceEdit',
   validate,
   asyncValidate,
+  initialValues: {},
+  enableReinitialize: true,
 })(
-  connect(mapStateToProps, { createEvent, fetchPlaces })(EventNew)
+  connect(null, { editPlace, deletePlace })(PlaceEdit)
 );
