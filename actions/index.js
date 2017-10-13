@@ -27,6 +27,16 @@ export function createPlace(values) {
   };
 }
 
+export function createEvent(values, callback) {
+  const request = axios.post(`${API_URL}/events`, values)
+    .then(() => callback());
+
+  return {
+    type: 'CREATE_EVENT',
+    payload: request,
+  };
+}
+
 export function deleteEvent(id, callback) {
   const request = axios.delete(`${API_URL}/events/${id}`)
     .then(() => callback());

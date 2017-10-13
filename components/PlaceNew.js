@@ -38,7 +38,7 @@ const validate = (values) => {
   const errors = {};
   const requiredFields = [
     'name',
-    // 'city',
+    'city',
     'address',
     'email',
     'from',
@@ -49,7 +49,7 @@ const validate = (values) => {
     'image2',
     'image3',
     'image4',
-    // 'category',
+    'category',
   ];
   requiredFields.forEach((field) => {
     if (!values[field]) {
